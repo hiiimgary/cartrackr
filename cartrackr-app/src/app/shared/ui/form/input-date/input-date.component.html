@@ -1,0 +1,11 @@
+<ion-item lines="none" color="transparent" class="custom-input">
+  <ion-label position="stacked" class="input-label">{{ label }}</ion-label>
+  <ion-datetime-button datetime="date-time"></ion-datetime-button>
+  <ion-popover [keepContentsMounted]="true" class="date-popover" show-backdrop="true">
+    <ng-template>
+      <ion-datetime id="date-time" size="cover" [value]="dateTimeValue" locale="hu-HU" presentation="date"
+        (ionChange)="onChangeValue($event)">
+      </ion-datetime>
+    </ng-template>
+  </ion-popover>
+</ion-item>

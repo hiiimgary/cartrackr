@@ -1,0 +1,41 @@
+<ng-container *ngIf="detail$ | async"></ng-container>
+<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+  <form [formGroup]="createForm" (ngSubmit)="onSubmitClick()">
+    <!-- BASIC INFO -->
+    <app-text-input formControlName="name" label="Name" icon="business" type="text"
+      placeholder="My business"></app-text-input>
+
+    <!-- LOCATION -->
+    <ng-container formGroupName="location">
+      <h2 class="font-bold mt-6 mb-4 leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white">
+        Location</h2>
+
+      <app-text-input formControlName="country" label="Country" icon="business" type="text"></app-text-input>
+      <app-text-input formControlName="city" label="City" icon="business" type="text"></app-text-input>
+      <app-text-input formControlName="zipCode" label="Zip code" icon="business" type="text"></app-text-input>
+      <app-text-input formControlName="street" label="Street" icon="business" type="text"></app-text-input>
+      <app-text-input formControlName="streetNumber" label="Street number" icon="business" type="text"></app-text-input>
+      <div class="flex items-center gap-4">
+        <app-text-input class="flex-1" formControlName="latitude" label="Latitude" icon="business"
+          type="text"></app-text-input>
+        <app-text-input class="flex-1" formControlName="longitude" label="Longitude" icon="business"
+          type="text"></app-text-input>
+      </div>
+    </ng-container>
+
+    <!-- Contact -->
+    <ng-container formGroupName="contactInfo">
+      <h2 class="font-bold mt-6 mb-4 leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white">
+        Contact info</h2>
+
+      <app-text-input formControlName="email" label="E-mail" icon="business" type="text"></app-text-input>
+      <app-text-input formControlName="phone" label="Phone" icon="business" type="text"></app-text-input>
+    </ng-container>
+
+    <app-input-toggle formControlName="isActive" label="isActive">isActive</app-input-toggle>
+
+
+    <button type="submit" class="btn w-full mt-6" [disabled]="createForm.pristine">Save</button>
+
+  </form>
+</div>

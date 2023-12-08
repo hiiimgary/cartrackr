@@ -1,0 +1,9 @@
+<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+  <app-alert *ngIf="errorMsg$ | async as error" [text]="error" class="mb-8"></app-alert>
+  <form [formGroup]="createForm" (ngSubmit)="onSubmitClick()">
+    <app-text-input formControlName="email" label="Email" type="email"></app-text-input>
+    <app-input-select placeholder="Select Role" formControlName="permission" label="Role"
+      [options]="permissions"></app-input-select>
+    <button type="submit" class="btn w-full mt-6">Invite</button>
+  </form>
+</div>

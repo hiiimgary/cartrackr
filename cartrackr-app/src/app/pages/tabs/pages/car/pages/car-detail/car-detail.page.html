@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar with-back-button no-border">
+    <ion-title>
+      <div class="title">
+        {{ carSignal().licensePlate }}
+      </div>
+      <p class="subtitle">
+        {{ carSignal().brand.name }} {{ carSignal().model.name }}
+      </p>
+
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="../"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- IMAGE -->
+  <ng-container *ngIf="carSignal().images as images; else noImage">
+    <ng-container *ngIf="images.length > 0; else noImage">
+      <ion-card class="ion-no-margin cover-image-card" button (click)="isFullscreenGalleryOpen = true">
+        <ion-img class="cover-image" [src]="images[0].path"></ion-img>
+      </ion-card>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-template #noImage>
+    <div class="no-image-wrapper">
+    </div>
+  </ng-template>
+
+
+  <ng-container *ngIf="carSignal() as detail">
+
+    <!-- DETAILS -->
+    <ng-container *ngIf="detail.alerts.unreadCount > 0">
+      <ng-container [ngTemplateOutlet]="alerts"></ng-container>
+    </ng-container>
+
+    <app-smart-card class="border-bottom-sm" routerLink="expenses" icon="cash-outline" [button]="true">
+      <h5 header>Expenses</h5>
+      <div class="expense-body" *ngIf="detail.expenses.monthlyAverage > 0">
+        <div class="metric">
+          <div class="metric-group">
+            <strong>Current Month</strong> <span>{{ detail.expenses.currentSpending | mask:'separator' }}
+              Ft</span>
+          </div>
+          <ion-progress-bar class="progress-bar"
+            [value]="detail.expenses.currentSpending > detail.expenses.monthlyAverage ? 1 : detail.expenses.currentSpending / detail.expenses.monthlyAverage"></ion-progress-bar>
+
+        </div>
+        <div class="metric">
+          <div class="metric-group">
+            <strong>Monthly average</strong> <span>{{ detail.expenses.monthlyAverage | mask:'separator' }}
+              Ft</span>
+          </div>
+          <ion-progress-bar class="progress-bar"
+            [value]="detail.expenses.currentSpending > detail.expenses.monthlyAverage ? detail.expenses.monthlyAverage / detail.expenses.currentSpending :1"></ion-progress-bar>
+
+        </div>
+
+      </div>
+    </app-smart-card>
+
+    <app-smart-card class="border-top-sm border-bottom-sm" [routerLink]="'service-entries'" icon="hammer-outline"
+      [button]="true">
+      <h5 header>Repairs</h5>
+    </app-smart-card>
+
+    <app-smart-card class="border-top-sm" routerLink="deadlines" icon="calendar-outline" [button]="true">
+      <h5 header>Deadlines</h5>
+    </app-smart-card>
+
+
+
+    <app-smart-card class="border-bottom-sm" routerLink="expenses" icon="pulse-outline"
+      [color]="detail.consumption.refills.length > 0 && detail.consumption.average * 1.25 < detail.consumption.refills[detail.consumption.refills.length - 1].value ? 'danger-card' : 'primary-card'">
+      <h5 header class="consumption-header">
+        <span>Comsumption</span>
+        <span class="consumption"><strong>{{ detail.consumption.average | number:'.2'}}</strong> L / 100 km</span>
+      </h5>
+      <div class="comsumption-alert"
+        *ngIf="detail.consumption.refills.length > 0 && detail.consumption.average * 1.25 < detail.consumption.refills[detail.consumption.refills.length - 1].value">
+        <ion-badge color="danger">Your last consumption is way higher than usual.</ion-badge>
+      </div>
+      <app-linechart [data]="detail.consumption.refills"></app-linechart>
+    </app-smart-card>
+
+    <app-smart-card class="border-top-sm" routerLink="deadlines" icon="trending-up-outline">
+      <h5 header>Mileage</h5>
+      <app-linechart [data]="detail.mileage.data" [yAxisFormat]="'.3s'"></app-linechart>
+
+    </app-smart-card>
+
+    <ng-container *ngIf="detail.alerts.unreadCount === 0">
+      <ng-container [ngTemplateOutlet]="alerts"></ng-container>
+    </ng-container>
+
+    <ng-template #alerts>
+      <app-smart-card routerLink="alerts" [color]="detail.alerts.unreadCount === 0 ? 'primary-card' : 'danger-card'"
+        icon="warning-outline" [button]="true">
+        <div header class="card-header-with-badge">
+          <h5>Alert</h5>
+          <ion-badge *ngIf="detail.alerts.unreadCount > 0" color="danger">{{ detail.alerts.unreadCount }}</ion-badge>
+
+        </div>
+      </app-smart-card>
+    </ng-template>
+
+    <ion-button (click)="isQrOpen= true" fill="clear" expand="block">
+      Share with service
+    </ion-button>
+
+    <ion-button (click)="isDeleteOpen = true" color="danger" fill="clear" expand="block">
+      Delete
+    </ion-button>
+
+  </ng-container>
+
+</ion-content>
+
+<!-- FULLSCREEN GALLERY -->
+<app-fullscreen-gallery-modal *ngIf="carSignal().images as images" [startIndex]="isFullscreenGalleryOpen ? 0 : null"
+  (onClose)="isFullscreenGalleryOpen = false" [images]="images">
+  <ng-template appGalleryHeader let-data>
+    <ion-header class="fullscreen-header fade">
+      <ion-toolbar color="transparent" class="main-toolbar">
+        <ion-buttons slot="end">
+          <ion-button (click)="isFullscreenGalleryOpen = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  </ng-template>
+</app-fullscreen-gallery-modal>
+
+<!-- CONFIRM DELETE -->
+<app-confirmation-modal [isOpen]="isDeleteOpen" (onToggle)="isDeleteOpen = false"
+  [title]="'CAR.DETAIL.DELETE_MODAL.TITLE' | translate"
+  [description]="'CAR.DETAIL.DELETE_MODAL.DESCRIPTION' | translate">
+  <ion-button (click)="isDeleteOpen = false" left fill="clear" expand="block"><strong>{{
+      'CAR.DETAIL.DELETE_MODAL.CANCEL_BTN' | translate
+      }}</strong></ion-button>
+  <ion-button right expand="block" color="danger" (click)="onDeleteConfirmClick()">
+    <strong>{{ 'CAR.DETAIL.DELETE_MODAL.CONFIRM_BTN' | translate }}</strong>
+  </ion-button>
+</app-confirmation-modal>
+
+<ion-modal [isOpen]="isQrOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title color="primary">Share with service</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="isQrOpen = false" color="primary">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+
+
+      <div class="qr-wrapper">
+        <ng-container *ngIf="carSignal()?.qrCode as qrCode">
+          <qrcode [qrdata]="qrCode" [width]="width" [errorCorrectionLevel]="'M'" colorDark="#10443f">
+          </qrcode>
+        </ng-container>
+      </div>
+
+
+      <ion-list-header>
+        <ion-label color="primary">Services</ion-label>
+      </ion-list-header>
+      <ion-list [inset]="true">
+
+
+        <app-list-card *ngFor="let business of carSignal().businesses"
+          [color]="business.isAccessGranted ? 'primary-card' :'warning-card'">
+          <ion-label title>
+            {{ business.businessName }}
+          </ion-label>
+          <ng-container subtitle>
+            {{ business.createdAt | date:'yyyy.MM.dd hh:mm'}}
+          </ng-container>
+          <ng-container options>
+            <ion-item-option color="danger" (click)="onChangeBusinessAccess(business.businessCarId, false)">
+              <ion-icon slot="top" name="trash-outline"></ion-icon>
+              {{ business.isAccessGranted ? 'Remove' : 'Deny' }}
+            </ion-item-option>
+            <ion-item-option *ngIf="!business.isAccessGranted"
+              (click)="onChangeBusinessAccess(business.businessCarId, true)">
+              <ion-icon slot="top" name="checkmark-done-outline"></ion-icon>
+              Allow
+            </ion-item-option>
+          </ng-container>
+        </app-list-card>
+      </ion-list>
+
+
+
+
+    </ion-content>
+  </ng-template>
+
+</ion-modal>

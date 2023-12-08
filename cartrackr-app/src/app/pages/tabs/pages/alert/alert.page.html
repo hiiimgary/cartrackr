@@ -1,0 +1,35 @@
+<ion-header translucent>
+  <ion-toolbar color="light" class="main-toolbar">
+    <ion-title>{{ 'ALERT.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+  <ion-header collapse="condense">
+    <ion-toolbar color="light" class="collapsible">
+      <ion-title color="primary" size="large">{{ 'ALERT.TITLE' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="alertForm">
+
+    <app-input-license-plate [label]="'ALERT.LICENSE_PLATE.LABEL' | translate"
+      formControlName="licensePlate"></app-input-license-plate>
+
+    <app-input-radio formControlName="reason" [label]="'ALERT.TYPE' | translate"
+      [options]="alertCategoriesSignal()"></app-input-radio>
+
+  </form>
+
+  <ion-button haptic class="submit-btn ion-margin" expand="block" (click)="onSubmitClick()" color="primary"
+    [disabled]="(isLoading$ | async) === true">
+    <app-loading [isLoading$]="isLoading$">
+      <strong>
+        {{ 'ALERT.SUBMIT_BTN' | translate }}
+      </strong>
+    </app-loading>
+
+  </ion-button>
+
+</ion-content>

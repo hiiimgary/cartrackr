@@ -1,0 +1,16 @@
+.linechart-y-axis,
+.linechart-x-axis {
+  path,
+  .tick line {
+    stroke: rgba(#10443f, 0.3);
+  }
+}
+.linechart-line-group {
+  .line {
+    stroke: #10443f;
+  }
+  .area {
+    fill: #10443f;
+    opacity: 0.3;
+  }
+}

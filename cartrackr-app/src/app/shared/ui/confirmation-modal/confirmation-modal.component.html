@@ -1,0 +1,32 @@
+<ion-modal [isOpen]="isOpen" [handle]="false" [initialBreakpoint]="1" [breakpoints]="[0, 1]" class="confirmation-modal"
+  (willDismiss)="onToggle.emit(!isOpen)">
+  <ng-template>
+    <div class="padding-top inner-content">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8" offset="2">
+            <ng-content select="[illustration]"></ng-content>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col class="ion-padding-vertical" size="8" offset="2" *ngIf="title || description">
+            <ion-text color="medium">
+              <h3 class="ion-text-center">{{ title }}</h3>
+            </ion-text>
+            <ion-note>
+              <p class="ion-text-center confirmation-description">{{ description }}</p>
+            </ion-note>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ng-content select="[left]"></ng-content>
+          </ion-col>
+          <ion-col size="6">
+            <ng-content select="[right]"></ng-content>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ng-template>
+</ion-modal>

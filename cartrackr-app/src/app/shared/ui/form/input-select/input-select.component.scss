@@ -1,0 +1,34 @@
+:host {
+  display: block;
+  margin-block: 8px;
+}
+
+ion-select {
+  position: relative;
+  border: 1px solid var(--ion-color-input-border);
+  transition: border 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border-radius: 8px;
+  --padding-start: 12px !important;
+  --padding-top: 12px !important;
+  --padding-bottom: 12px !important;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    border: 3px solid transparent;
+    border-radius: 11px;
+    transition: border 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  &.select-expanded {
+    border-color: var(--ion-color-primary);
+    &::before {
+      border-color: rgba(var(--ion-color-primary-rgb), 0.2);
+    }
+  }
+}

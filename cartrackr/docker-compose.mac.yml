@@ -1,0 +1,15 @@
+version: '3.9'
+services:
+  mysql:
+    platform: linux/x86_64
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: hIIImGary1782
+      MYSQL_DATABASE: cartrackr_db
+    volumes:
+      - cartrackr_db:/var/lib/mysql
+    ports:
+      - '3306:3306'
+volumes:
+  cartrackr_db:
+    driver: local

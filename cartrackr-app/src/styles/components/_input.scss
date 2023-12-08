@@ -1,0 +1,23 @@
+ion-item.custom-input {
+  --inner-padding-end: 20px;
+  overflow: visible;
+  --padding-bottom: 4px;
+
+  ion-label {
+    font-weight: 700;
+  }
+}
+
+.date-popover {
+  &::part(content) {
+    --width: calc(100% - 30px);
+    --offset-x: 10px;
+  }
+}
+
+.select-popover {
+  &::part(content) {
+    --width: calc(100% - 30px);
+    --offset-x: 10px;
+  }
+}

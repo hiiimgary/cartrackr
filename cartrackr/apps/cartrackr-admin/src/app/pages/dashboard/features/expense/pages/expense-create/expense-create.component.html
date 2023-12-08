@@ -1,0 +1,8 @@
+<ng-container *ngIf="detail$ | async"></ng-container>
+<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+  <form [formGroup]="createForm" (ngSubmit)="onSubmitClick()">
+    <app-text-input formControlName="name" label="Category Name" type="text"></app-text-input>
+    <app-text-input formControlName="slug" label="slug" type="text"></app-text-input>
+    <button type="submit" class="btn w-full mt-6">Save</button>
+  </form>
+</div>

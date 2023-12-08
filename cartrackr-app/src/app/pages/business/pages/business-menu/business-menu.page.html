@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>
+      <div class="title">
+        {{ user().businessName }}
+      </div>
+      <p class="subtitle">
+        {{ user().name }}
+      </p>
+
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <div class="wrapper">
+    <ion-button [routerLink]="['/', 'business','scan-car']" expand="block" expand="block">Scan car</ion-button>
+
+    <ion-button class="logout-btn" (click)="onLogoutClick()" expand="block" color="danger"
+      fill="clear">Logout</ion-button>
+  </div>
+
+
+</ion-content>

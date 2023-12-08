@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>{{ expenseDetail()?.title }}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/tabs/car/' + carId + '/expenses'" class="ion-back-button-no-text">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ng-container *ngIf="expenseDetail() as expense">
+    <ion-list>
+      <ion-item>
+        <div class="row">
+          <span class="bold">Category</span> <span class="value">{{expense.expenseCategory.name}}</span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="row">
+          <span class="bold">Date</span> <span class="value">{{expense.date | date: 'yyyy. MMMM dd.'}}</span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="row">
+          <span class="bold">Price</span> <span class="value">{{expense.price | mask:'separator'}} Ft</span>
+        </div>
+      </ion-item>
+
+      <ng-container *ngIf="expense.refill">
+        <ion-item>
+          <div class="row">
+            <span class="bold">Amount</span> <span class="value">{{expense.refill.amount| mask:'separator'}} L</span>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="row">
+            <span class="bold">Mileage</span> <span class="value">{{expense.refill.mileage| mask:'separator'}} km</span>
+          </div>
+        </ion-item>
+        <ion-item>
+          <div class="row">
+            <span class="bold">Full Tank</span> <span class="value">{{expense.refill.isFull ? 'Yes' : 'No'}}</span>
+          </div>
+        </ion-item>
+      </ng-container>
+
+
+    </ion-list>
+
+    <ion-button (click)="isDeleteOpen = true" color="danger" fill="clear" expand="block">
+      {{ 'CAR.EXPENSES.DELETE_BTN' | translate }}
+    </ion-button>
+  </ng-container>
+
+
+
+
+
+</ion-content>
+
+
+<!-- CONFIRM DELETE -->
+<app-confirmation-modal [isOpen]="isDeleteOpen" (onToggle)="isDeleteOpen = false"
+  [title]="'CAR.EXPENSES.DELETE_MODAL.TITLE' | translate"
+  [description]="'CAR.EXPENSES.DELETE_MODAL.DESCRIPTION' | translate">
+  <ion-button (click)="isDeleteOpen = false" left fill="clear" expand="block"><strong>{{
+      'CAR.EXPENSES.DELETE_MODAL.CANCEL_BTN' | translate
+      }}</strong></ion-button>
+  <ion-button right expand="block" color="danger" (click)="onDeleteConfirmClick()">
+    <strong>{{ 'CAR.EXPENSES.DELETE_MODAL.CONFIRM_BTN' | translate }}</strong>
+  </ion-button>
+</app-confirmation-modal>

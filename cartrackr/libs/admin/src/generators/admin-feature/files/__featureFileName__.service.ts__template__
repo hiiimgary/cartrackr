@@ -1,0 +1,31 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { <%= classify(featureName) %> } from './<%= dasherize(featureName) %>.types';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class <%= classify(featureName) %>Service {
+  constructor(private readonly http: HttpClient) {}
+
+  fetchList$(): Observable<<%= classify(featureName) %>[]> {
+    return this.http.get<<%= classify(featureName) %>[]>('<%= apiEndpoint %>');
+  }
+
+  fetchDetail$(id: string): Observable<<%= classify(featureName) %>> {
+    return this.http.get<<%= classify(featureName) %>>(`<%= apiEndpoint %>/${id}`);
+  }
+
+  create$(data: Omit<<%= classify(featureName) %>, 'id'>): Observable<<%= classify(featureName) %>> {
+    return this.http.post<<%= classify(featureName) %>>('<%= apiEndpoint %>', data);
+  }
+
+  update$(id: string, data: Partial<<%= classify(featureName) %>>): Observable<<%= classify(featureName) %>> {
+    return this.http.post<<%= classify(featureName) %>>(`<%= apiEndpoint %>/${id}`, data);
+  }
+
+  delete$(id: number): Observable<unknown> {
+    return this.http.delete<<%= classify(featureName) %>>(`<%= apiEndpoint %>/${id}`);
+  }
+}

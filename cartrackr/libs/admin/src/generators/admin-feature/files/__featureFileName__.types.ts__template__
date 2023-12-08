@@ -1,0 +1,4 @@
+export type <%= classify(featureName) %> = {
+  readonly id: number;
+  readonly title: string;
+};

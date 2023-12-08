@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>Repairs</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/tabs/car/' + carId" class="ion-back-button-no-text">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ng-container *ngIf="serviceEntrySignal() as entries">
+    <ion-list-header>
+      <ion-label color="primary">Repairs</ion-label>
+    </ion-list-header>
+    <ion-list [inset]="true">
+
+      <app-list-card *ngFor="let entry of entries" [button]="true" [routerLink]="[entry.id]">
+        <ion-label title>
+          {{ entry.title }}
+        </ion-label>
+        <ng-container subtitle>
+          {{ entry.date | date}}
+        </ng-container>
+        <ion-badge end>{{ entry.price | number:'1.0-0' }} Ft</ion-badge>
+      </app-list-card>
+    </ion-list>
+  </ng-container>
+
+
+
+
+
+</ion-content>

@@ -1,0 +1,20 @@
+<!-- HEADER CONTENT -->
+<ng-container *ngIf="header">
+  <ng-container *ngTemplateOutlet="header; context: {$implicit: activeImage}"></ng-container>
+</ng-container>
+
+<!-- MAIN CONTENT -->
+<ion-content color="transparent" [fullscreen]="true" [scrollY]="false" class="fullscreen-gallery" #content>
+  <swiper-container #swiper class="swiper" space-between="5" zoom="true" (slideChange)="onChangeActiveIndex($event)">
+    <swiper-slide *ngFor="let img of images; trackBy:identify">
+      <div class="swiper-zoom-container">
+        <img [src]="img.path | safe" />
+      </div>
+    </swiper-slide>
+  </swiper-container>
+</ion-content>
+
+<!-- FOOTER CONTENT -->
+<ng-container *ngIf="footer">
+  <ng-container *ngTemplateOutlet="footer; context: {$implicit: activeImage}"></ng-container>
+</ng-container>

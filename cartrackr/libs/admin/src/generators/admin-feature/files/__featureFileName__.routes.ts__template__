@@ -1,0 +1,25 @@
+import { Route } from '@angular/router';
+
+export const <%= camelize(featureName) %>Routes: Route[] = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./pages/<%= dasherize(featureName) %>-list/<%= dasherize(featureName) %>-list.component').then(
+        (m) => m.<%= classify(featureName) %>ListComponent
+      ),
+  },
+  {
+    path: 'create',
+    loadComponent: () =>
+      import('./pages/<%= dasherize(featureName) %>-create/<%= dasherize(featureName) %>-create.component').then(
+        (m) => m.<%= classify(featureName) %>CreateComponent
+      ),
+  },
+  {
+    path: ':id',
+    loadComponent: () =>
+      import('./pages/<%= dasherize(featureName) %>-create/<%= dasherize(featureName) %>-create.component').then(
+        (m) => m.<%= classify(featureName) %>CreateComponent
+      ),
+  },
+];

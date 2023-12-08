@@ -1,0 +1,17 @@
+<app-detail-header [addBtnText]="'Add <%= classify(featureName) %>'" [url]="'create'" (filter)="onFilter($event)"></app-detail-header>
+<ng-container *ngIf="list$ | async as list">
+    <cartrackr-table [data]="list">
+        <ng-template [appTableHeader]="list" let-data>
+            <th class="py-3 px-6" *ngFor="let header of data[0] | keyvalue">{{ header.key }}</th>
+            <th></th>
+        </ng-template>
+        <ng-template [appTableRow]="list" let-row>
+            <td class="py-3 px-6" *ngFor="let row of row | keyvalue;">{{ row.value }}</td>
+
+            <td class="flex gap-2 justify-end py-2 pr-2 ">
+                <a class="btn-sm" [routerLink]="[row.id]">Edit</a>
+                <button class="btn-sm danger" (click)="onDelete(row.id)">Delete</button>
+            </td>
+        </ng-template>
+    </cartrackr-table>
+</ng-container>

@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "admin-feature": {
+      "factory": "./src/generators/admin-feature/generator",
+      "schema": "./src/generators/admin-feature/schema.json",
+      "description": "admin-feature generator"
+    }
+  }
+}

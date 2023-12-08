@@ -1,0 +1,10 @@
+<ion-content class="safe-bottom" [scrollY]="false">
+
+  <div class="login-buttons">
+    <ion-button color="dark" *ngIf="isIos" (click)="onSignInWithAppleClick()" expand="block">Sign in with
+      Apple</ion-button>
+    <ion-button color="danger" (click)="onSignInWithGoogleClick()" expand="block">Sign in with Google</ion-button>
+    <ion-button fill="none" routerLink="business" expand="block">Business login</ion-button>
+  </div>
+
+</ion-content>

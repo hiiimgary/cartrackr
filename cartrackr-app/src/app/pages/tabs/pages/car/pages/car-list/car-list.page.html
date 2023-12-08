@@ -1,0 +1,64 @@
+<ion-header translucent>
+  <ion-toolbar color="light" class="main-toolbar">
+    <ion-title>{{ 'CAR.LIST.TITLE' | translate }}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [scrollY]="false" color="light">
+  <ion-refresher slot="fixed" (ionRefresh)="onRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <cdk-virtual-scroll-viewport class="ion-content-scroll-host" [itemSize]="viewport.itemSize"
+    [minBufferPx]="viewport.minBuffer" [maxBufferPx]="viewport.maxBuffer">
+
+
+    <ion-header collapse="condense">
+      <ion-toolbar color="light" class="collapsible">
+        <ion-title color="primary" size="large">{{ 'CAR.LIST.TITLE' | translate }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button haptic slot="icon-only" color="primary" (click)="onOpenCreateClick()">
+            <ion-icon name="add"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ng-container *ngIf="listSignal() as list">
+      <ng-container *ngIf="list.length > 0; else noResult">
+        <app-car-list-item *cdkVirtualFor="let car of list; trackBy: identify" [car]="car"></app-car-list-item>
+      </ng-container>
+    </ng-container>
+
+  </cdk-virtual-scroll-viewport>
+
+
+</ion-content>
+
+
+<ng-template #noResult>
+  <div class="no-content-wrapper">
+    <div class="no-content">
+      <ion-row>
+        <ion-col size="6" offset="3">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-text color="medium">
+            <h1 class="ion-text-center">{{ 'CAR.LIST.NO_RESULT.TITLE' | translate }}</h1>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" offset="3" class="ion-padding-top">
+          <ion-button expand="block" haptic (click)="onOpenCreateClick()"><strong>{{ 'CAR.LIST.NO_RESULT.ADD_BTN'
+              |
+              translate }}</strong></ion-button>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </div>
+</ng-template>

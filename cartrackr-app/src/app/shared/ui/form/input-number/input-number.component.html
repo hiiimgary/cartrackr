@@ -1,0 +1,10 @@
+<ion-item lines="none" color="transparent" class="custom-input">
+  <ion-label position="stacked" class="input-label">{{ label }}</ion-label>
+  <div class="input-wrapper">
+    <input type="text" mask="separator" inputmode="numeric" (input)="onChangeValue($event)" [value]="value"
+      [placeholder]="placeholder" />
+    <div class="suffix">
+      <ng-content select="[suffix]"></ng-content>
+    </div>
+  </div>
+</ion-item>

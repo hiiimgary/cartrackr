@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>{{ repairDetail()?.title }}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/tabs/car/' + carId + '/expenses'" class="ion-back-button-no-text">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ng-container *ngIf="repairDetail() as repair">
+    <ion-list>
+      <ion-item>
+        <div class="row">
+          <span class="bold">Category</span> <span class="value">{{repair.expenseCategory.name}}</span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="row">
+          <span class="bold">Date</span> <span class="value">{{repair.date | date: 'yyyy. MMMM dd.'}}</span>
+        </div>
+      </ion-item>
+      <ion-item>
+        <div class="row">
+          <span class="bold">Price</span> <span class="value">{{repair.price | mask:'separator'}} Ft</span>
+        </div>
+      </ion-item>
+
+
+
+    </ion-list>
+
+    <ion-item>
+      <p class="description">
+        {{ repair.serviceEntry?.description }}
+      </p>
+    </ion-item>
+  </ng-container>
+
+
+
+
+
+</ion-content>

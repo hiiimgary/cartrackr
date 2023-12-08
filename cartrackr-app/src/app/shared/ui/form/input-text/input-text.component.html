@@ -1,0 +1,6 @@
+<ion-item lines="none" color="transparent" class="custom-input">
+  <ion-label position="stacked" class="input-label">{{ label }}</ion-label>
+  <div class="input-wrapper">
+    <input type="text" (input)="onChangeValue($event)" [value]="value" [placeholder]="placeholder" />
+  </div>
+</ion-item>

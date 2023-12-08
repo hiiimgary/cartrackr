@@ -1,0 +1,65 @@
+<ng-container *ngIf="(isSuccess$ | async) === false; else success">
+    <h1 class="text-xl font-bold my-6 leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        Set up a new business
+    </h1>
+
+    <app-alert *ngIf="errorMsg$ | async as error" [text]="error" class="mb-8"></app-alert>
+
+    <form [formGroup]="createBusinessForm" (ngSubmit)="onCreateBusinessClick()">
+        <!-- BASIC INFO -->
+        <app-text-input formControlName="name" label="Name" icon="business" type="text"
+            placeholder="My business"></app-text-input>
+
+        <!-- LOCATION -->
+        <ng-container formGroupName="location">
+            <h2 class="font-bold mt-6 mb-4 leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white">
+                Location</h2>
+
+            <app-text-input formControlName="country" label="Country" icon="business" type="text"></app-text-input>
+            <app-text-input formControlName="city" label="City" icon="business" type="text"></app-text-input>
+            <app-text-input formControlName="zipCode" label="Zip code" icon="business" type="text"></app-text-input>
+            <app-text-input formControlName="street" label="Street" icon="business" type="text"></app-text-input>
+            <app-text-input formControlName="streetNumber" label="Street number" icon="business"
+                type="text"></app-text-input>
+            <div class="flex items-center gap-4">
+                <app-text-input formControlName="latitude" label="Latitude" icon="business"
+                    type="text"></app-text-input>
+                <app-text-input formControlName="longitude" label="Longitude" icon="business"
+                    type="text"></app-text-input>
+            </div>
+        </ng-container>
+
+        <!-- Contact -->
+        <ng-container formGroupName="contactInfo">
+            <h2 class="font-bold mt-6 mb-4 leading-tight tracking-tight text-gray-900 md:text-lg dark:text-white">
+                Contact info</h2>
+
+            <app-text-input formControlName="email" label="E-mail" icon="business" type="text"></app-text-input>
+            <app-text-input formControlName="phone" label="Phone" icon="business" type="text"></app-text-input>
+        </ng-container>
+
+
+        <button type="submit" class="btn w-full mt-6">Create business</button>
+    </form>
+</ng-container>
+
+<ng-template #success>
+    <div class="p-4 text-center sm:p-5 h-full flex flex-col items-center justify-center">
+        <div
+            class="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900 p-2 flex items-center justify-center mx-auto mb-3.5">
+            <svg aria-hidden="true" class="w-8 h-8 text-green-500 dark:text-green-400" fill="currentColor"
+                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            <span class="sr-only">Success</span>
+        </div>
+        <h2 class="text-xl mb-1 font-semibold text-gray-900 dark:text-white">Success</h2>
+        <p class="mb-4 text-md text-gray-900 dark:text-white dark:text-opacity-50">Business created successfully</p>
+        <a [routerLink]="['/', 'business-selector']"
+            class="py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900">
+            Back to business selector
+        </a>
+    </div>
+</ng-template>

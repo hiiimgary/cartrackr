@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  margin-block: 8px;
+}
+
+.list-item {
+  --min-height: 64px;
+  &::part(native) {
+    background: #dce2e1;
+  }
+}

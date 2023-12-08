@@ -1,0 +1,65 @@
+<ng-container *ngIf="expenseTypeListener$ | async"></ng-container>
+
+<ion-header>
+  <ion-toolbar class="main-toolbar no-border" color="light">
+    <ion-title>{{ 'CAR.EXPENSES.CREATE.TITLE' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button haptic slot="icon-only" color="primary" (click)="onCloseClick()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ion-note>
+    <p class="ion-text-center ion-margin">
+      {{ 'CAR.EXPENSES.CREATE.DESCRIPTION' | translate }}
+    </p>
+  </ion-note>
+
+  <form [formGroup]="createForm">
+    <app-input-date formControlName="date" [label]="'CAR.EXPENSES.CREATE.DATE.LABEL' | translate"></app-input-date>
+
+    <app-input-text formControlName="title" [label]="'CAR.EXPENSES.CREATE.NAME.LABEL' | translate"></app-input-text>
+
+    <app-input-number formControlName="price" [label]="'CAR.EXPENSES.CREATE.PRICE.LABEL' | translate">
+      <span suffix>Ft</span>
+    </app-input-number>
+
+
+    <app-input-select [label]="'CAR.EXPENSES.CREATE.EXPENSE_TYPE.LABEL' | translate" formControlName="expenseCategoryId"
+      [options]="expenseCategoriesSignal()"></app-input-select>
+
+
+    <ng-container *ngIf="createForm.controls['refill']">
+      <ng-container formGroupName="refill">
+        <app-input-number formControlName="amount" [label]="'CAR.EXPENSES.CREATE.AMOUNT.LABEL' | translate">
+          <span suffix>L</span>
+        </app-input-number>
+
+
+        <app-input-number formControlName="mileage" [label]="'CAR.EXPENSES.CREATE.MILEAGE.LABEL' | translate">
+          <span suffix>km</span>
+        </app-input-number>
+
+        <app-input-toggle formControlName="isFull"
+          [label]="'CAR.EXPENSES.CREATE.IS_FULL.LABEL' | translate"></app-input-toggle>
+      </ng-container>
+    </ng-container>
+
+  </form>
+
+  <ion-button haptic class="submit-btn ion-margin" expand="block" (click)="onSubmitClick()" color="primary"
+    [disabled]="(isLoading$ | async) === true">
+    <app-loading [isLoading$]="isLoading$">
+      <strong>
+        {{ 'CAR.EXPENSES.CREATE.SAVE_BTN' | translate }}
+      </strong>
+    </app-loading>
+
+  </ion-button>
+
+
+
+</ion-content>

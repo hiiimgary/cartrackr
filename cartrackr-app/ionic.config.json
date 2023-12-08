@@ -1,0 +1,7 @@
+{
+  "name": "cartrackr-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

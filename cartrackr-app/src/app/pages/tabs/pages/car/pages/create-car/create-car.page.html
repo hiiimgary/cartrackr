@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar class="main-toolbar no-border" color="light">
+    <ion-title>{{ 'CAR.CREATE.TITLE' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button haptic slot="icon-only" color="primary" (click)="onCloseClick()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ion-note>
+    <p class="ion-text-center ion-margin">
+      {{ 'CAR.CREATE.DESCRIPTION' | translate }}
+    </p>
+  </ion-note>
+
+  <form [formGroup]="createForm">
+
+    <app-input-license-plate [label]="'CAR.CREATE.LICENSE_PLATE.LABEL' | translate"
+      formControlName="licensePlate"></app-input-license-plate>
+
+    <app-input-car-type [label]="'CAR.CREATE.CAR_TYPE.LABEL' | translate" formControlName="carType"
+      [brands]="carBrandsSignal()"></app-input-car-type>
+
+    <app-input-select [label]="'CAR.CREATE.FUEL_TYPE.LABEL' | translate" formControlName="fuelType"
+      [options]="fuelTypeOptions"></app-input-select>
+
+    <app-input-gallery [label]="'CAR.CREATE.IMAGES.LABEL' | translate" formControlName="images">
+    </app-input-gallery>
+
+  </form>
+
+  <ion-button class="submit-btn ion-margin" expand="block" (click)="onSubmitClick()" color="primary"
+    [disabled]="(isLoading$ | async) === true">
+    <app-loading [isLoading$]="isLoading$">
+      <strong>
+        {{ 'CAR.CREATE.SAVE_BTN' | translate }}
+      </strong>
+    </app-loading>
+
+  </ion-button>
+
+</ion-content>

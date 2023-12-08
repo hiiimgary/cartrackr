@@ -1,0 +1,9 @@
+<ion-modal [isOpen]="startIndex !== null" [handle]="false" class="transparent-modal" (willDismiss)="onClose.emit()">
+  <ng-template>
+
+    <app-zoomable-swiper [images]="images" [startIdx]="startIndex!" (onClose)="onCloseModal()" [header]="header"
+      [footer]="footer">
+    </app-zoomable-swiper>
+
+  </ng-template>
+</ion-modal>

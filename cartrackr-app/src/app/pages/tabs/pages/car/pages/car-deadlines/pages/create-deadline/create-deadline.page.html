@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar class="main-toolbar no-border" color="light">
+    <ion-title>{{ 'CAR.DEADLINES.CREATE.TITLE' | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" color="primary" (click)="onCloseClick()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ion-note>
+    <p class="ion-text-center ion-margin">
+      {{ 'CAR.DEADLINES.CREATE.DESCRIPTION' | translate }}
+    </p>
+  </ion-note>
+
+  <form [formGroup]="createForm">
+
+    <app-input-text formControlName="title" [label]="'CAR.DEADLINES.CREATE.NAME.LABEL' | translate"></app-input-text>
+    <app-input-date formControlName="deadline" [label]="'CAR.DEADLINES.CREATE.DATE.LABEL' | translate"></app-input-date>
+
+  </form>
+
+  <ion-button class="submit-btn ion-margin" expand="block" (click)="onSubmitClick()" color="primary"
+    [disabled]="(isLoading$ | async) === true">
+    <app-loading [isLoading$]="isLoading$">
+      <strong>
+        {{ 'CAR.DEADLINES.CREATE.SAVE_BTN' | translate }}
+      </strong>
+    </app-loading>
+
+  </ion-button>
+
+</ion-content>

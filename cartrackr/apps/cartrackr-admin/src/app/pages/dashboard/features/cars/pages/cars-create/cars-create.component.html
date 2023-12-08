@@ -1,0 +1,40 @@
+<ng-container *ngIf="detail$ | async as detail">
+
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-2 pl-6 dark:text-white flex items-center justify-between">
+    <div>
+      <h2 class="dark:text-white text-xl">{{ detail.brand.name }} {{ detail.model.name }}</h2>
+      <p>{{ detail.licensePlate }}</p>
+    </div>
+    <img class="object-cover aspect-square w-28 rounded-md" *ngIf="detail.images.length > 0"
+      [src]="detail.images[0].path" alt="">
+
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-6 dark:text-white my-4">
+    <h2 class="dark:text-white text-xl pb-6">New Entry</h2>
+
+    <form [formGroup]="createForm" (ngSubmit)="onSubmitClick()">
+      <app-text-input formControlName="title" label="Title" type="text"></app-text-input>
+      <app-text-input formControlName="description" label="Description" type="text"></app-text-input>
+      <app-text-input formControlName="price" label="Price" type="number"></app-text-input>
+      <app-input-toggle formControlName="isFinalized" label="Finalized">Finalized</app-input-toggle>
+      <button type="submit" class="btn w-full mt-6">Save</button>
+    </form>
+
+  </div>
+
+  <div *ngFor="let entry of detail.serviceEntries"
+    class="bg-white dark:bg-gray-800 rounded-lg p-6 dark:text-white my-4">
+    <div class="flex items-center justify-between pb-6">
+      <h2 class="dark:text-white text-xl ">{{ entry.title }}</h2>
+      <p><i>{{ entry.date | date: 'yyyy.MM.dd HH:mm' }}</i></p>
+
+    </div>
+
+    <p>{{ entry.description }}</p>
+
+    <p class="text-right"><strong>{{ entry.price }} Ft</strong></p>
+
+  </div>
+</ng-container>

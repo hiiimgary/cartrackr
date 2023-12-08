@@ -1,0 +1,48 @@
+<app-detail-header [addBtnText]="'Invite Employee'" [url]="'invite'" (filter)="onFilter($event)"></app-detail-header>
+
+<ng-container *ngIf="userId$ | async as userId">
+  <ng-container *ngIf="list$ | async as list">
+    <cartrackr-table [data]="list">
+      <ng-template [appTableHeader]="list" let-data>
+        <th class="py-3 px-6">id</th>
+        <th class="py-3 px-6">firstName</th>
+        <th class="py-3 px-6">lastName</th>
+        <th class="py-3 px-6">email</th>
+        <th class="py-3 px-6">registrationDate</th>
+        <th class="py-3 px-6">role</th>
+        <th></th>
+      </ng-template>
+      <ng-template [appTableRow]="list" let-row>
+        <td class="py-3 px-6">{{ row.id }}</td>
+        <td class="py-3 px-6">{{ row.firstName }}</td>
+        <td class="py-3 px-6">{{ row.lastName }}</td>
+        <td class="py-3 px-6">{{ row.email }}</td>
+        <td class="py-3 px-6">{{ row.registrationDate | date:'yyyy. MM. dd. hh:mm' }}</td>
+        <td class="py-3 px-6">
+          <span *ngIf="row.id === userId"
+            class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+            You
+          </span>
+          <span *ngIf="row.permission === permission.EMPLOYEE"
+            class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+            employee
+          </span>
+          <span *ngIf="row.permission === permission.OWNER"
+            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+            admin
+          </span>
+          <span *ngIf="row.permission === permission.MANAGER"
+            class="bg-teal-100 text-teal-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-teal-900 dark:text-teal-300">
+            manager
+          </span>
+        </td>
+        <td class="flex gap-2 justify-end py-2 pr-2">
+          <a class="btn-sm" [routerLink]="[row.userBusinessId]">Edit</a>
+          <button class="btn-sm danger"
+            [ngClass]="{'hide-btn': userId === row.id || row.permission === permission.OWNER}"
+            (click)="onDelete(row.id)">Delete</button>
+        </td>
+      </ng-template>
+    </cartrackr-table>
+  </ng-container>
+</ng-container>

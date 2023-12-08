@@ -1,0 +1,42 @@
+ion-toolbar {
+  &.main-toolbar {
+    --min-height: 55px;
+  }
+
+  &.no-border {
+    --border-width: 0 !important;
+  }
+
+  &.collapsible {
+    ion-buttons {
+      padding-bottom: 6px;
+    }
+  }
+
+  ion-back-button {
+    &.ion-back-button-no-text {
+      --padding-end: 12px;
+    }
+  }
+}
+
+ion-header,
+ion-footer {
+  &.fade {
+    ion-toolbar {
+      --border-width: 0 !important;
+    }
+  }
+}
+
+ion-header.fade {
+  ion-toolbar {
+    background: linear-gradient(to top, rgba(#000, 0) 0%, rgba(#000, 0.4) 30%, rgba(#000, 0.9) 100%);
+  }
+}
+
+ion-footer.fade {
+  ion-toolbar {
+    background: linear-gradient(to bottom, rgba(#000, 0) 0%, rgba(#000, 0.4) 30%, rgba(#000, 0.9) 100%);
+  }
+}

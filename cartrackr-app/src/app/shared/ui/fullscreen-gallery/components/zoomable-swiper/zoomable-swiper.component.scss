@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+.fullscreen-gallery {
+  position: absolute;
+  .swiper {
+    height: 100%;
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

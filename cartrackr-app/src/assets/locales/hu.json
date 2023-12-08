@@ -1,0 +1,122 @@
+{
+    "CAR": {
+        "LIST": {
+            "TITLE": "Cars",
+            "NO_RESULT": {
+                "TITLE": "No results found",
+                "ADD_BTN": "Add car"
+            }
+        },
+        "CREATE": {
+            "TITLE": "Add Car",
+            "DESCRIPTION": "Add car to collection to manage it easily",
+            "LICENSE_PLATE": {
+                "LABEL": "License plate"
+            },
+            "FUEL_TYPE": {
+                "LABEL": "Fuel type"
+            },
+            "IMAGES": {
+                "LABEL": "Images"
+            },
+            "SAVE_BTN": "Save"
+        },
+        "DETAIL": {
+            "DELETE_MODAL": {
+                "TITLE": "Delete Car",
+                "DESCRIPTION": "Are you sure you want to delete this car?",
+                "CANCEL_BTN": "Cancel",
+                "CONFIRM_BTN": "Delete"
+            }
+        },
+        "ALERTS": {
+            "TITLE": "Alerts",
+            "NEW": "New",
+            "RESOLVED": "Resolved",
+            "FALSE_ALARM": "Delete",
+            "RESOLVE": "Resolve"
+        },
+        "DEADLINES": {
+            "TITLE": "Deadlines",
+            "PAST_DUE": "Past due",
+            "EDIT": "Edit",
+            "DONE": "Done",
+            "UP_NEXT": "Up next",
+            "COMPLETED": "Completed",
+            "CREATE": {
+                "TITLE": "Add Deadline",
+                "DESCRIPTION": "Add Deadline to to get notification before due date.",
+                "NAME": {
+                    "LABEL": "Title"
+                },
+                "DATE": {
+                    "LABEL": "Date"
+                },
+                "BODY": {
+                    "LABEL": "DESCRIPTION"
+                },
+                "SAVE_BTN": "Save"
+            }
+        },
+        "EXPENSES": {
+            "TITLE": "Expenses",
+            "CREATE": {
+                "TITLE": "Add Expense",
+                "DESCRIPTION": "Add expense to manage your car finances.",
+                "DATE": {
+                    "LABEL": "Date"
+                },
+                "NAME": {
+                    "LABEL": "Title"
+                },
+                "PRICE": {
+                    "LABEL": "Price"
+                },
+                "EXPENSE_TYPE": {
+                    "LABEL": "Type"
+                },
+                "AMOUNT": {
+                    "LABEL": "Amount"
+                },
+                "MILEAGE": {
+                    "LABEL": "Mileage"
+                },
+                "IS_FULL": {
+                    "LABEL": "Full tank"
+                },
+                "SAVE_BTN": "Save"
+            },
+            "DELETE_BTN": "Delete",
+            "DELETE_MODAL": {
+                "TITLE": "Delete Expense",
+                "DESCRIPTION": "Are you sure you want to delete this expense?",
+                "CANCEL_BTN": "Cancel",
+                "CONFIRM_BTN": "Delete"
+            }
+        }
+    },
+    "ALERT": {
+        "TITLE": "Alert driver",
+        "LICENSE_PLATE": {
+            "LABEL": "License plate"
+        },
+        "TYPE": "Alert type",
+        "SUBMIT_BTN": "Send Alert"
+    },
+    "NAVBAR": {
+        "CAR": "Home",
+        "ALERT": "Alert",
+        "MAPS": "Maps",
+        "PROFILE": "Profile"
+    },
+    "INPUT": {
+        "GALLERY": {
+            "ADD": "Add",
+            "ADD_MORE": "Add More",
+            "ADD_IMAGES_MODAL": {
+                "CAPTURE_BTN": "Take photo",
+                "ADD_IMAGES_BTN": "Open Gallery"
+            }
+        }
+    }
+}

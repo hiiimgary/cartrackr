@@ -1,0 +1,51 @@
+<div class="flex items-center justify-between mb-12">
+    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Select business</h5>
+    <a [routerLink]="['create-business']" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+        Set up a new business
+    </a>
+</div>
+<div class="flow-root">
+    <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+        <ng-container *ngIf="businesses$ | async as businesses">
+            <li *ngFor="let business of businesses">
+                <button (click)="onSelectBusinessClick(business.id)" [disabled]="!business.isActive"
+                    class="py-3 px-4 sm:py-4 w-full rounded-lg"
+                    [ngClass]="{'hover:bg-gray-700 cursor-pointer': business.isActive}">
+                    <div class="flex items-center space-x-4">
+                        <div class="flex-shrink-0">
+                            <app-icon name="business" class="w-8 h-8 text-gray-400"
+                                [ngClass]="{'opacity-40': !business.isActive}"></app-icon>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-sm text-left font-medium text-gray-900 truncate dark:text-white"
+                                [ngClass]="{'opacity-40': !business.isActive}">
+                                {{ business.name }}
+                            </p>
+                            <!-- <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                {{business.permission}}
+                            </p> -->
+                        </div>
+                        <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                            <span *ngIf="!business.isActive"
+                                class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">
+                                in-review
+                            </span>
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                                {{business.permission}}
+                            </span>
+                        </div>
+                    </div>
+                </button>
+
+            </li>
+        </ng-container>
+
+
+    </ul>
+</div>
+<div class="flex justify-center pt-32">
+    <button type="button" (click)="onLogoutClick()" class="btn w-full" id="user-menu-button">
+        Logout
+    </button>
+</div>

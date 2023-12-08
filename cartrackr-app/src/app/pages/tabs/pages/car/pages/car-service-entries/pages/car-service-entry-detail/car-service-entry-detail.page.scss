@@ -1,0 +1,17 @@
+.bold {
+  font-weight: 600;
+}
+.value {
+  font-style: italic;
+  padding-right: 2px;
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.description {
+  padding-block: 8px;
+}

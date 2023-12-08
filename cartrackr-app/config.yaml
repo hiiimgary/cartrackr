@@ -1,0 +1,19 @@
+vars:
+  BUNDLE_ID:
+    default: com.hiimgary.cartrackr
+  PACKAGE_NAME:
+    default: com.hiimgary.cartrackr
+  VERSION_NAME:
+    default: "1.0.0"
+  VERSION_CODE:
+    default: 2
+
+platforms:
+  ios:
+    targets:
+      App:
+        bundleId: $BUNDLE_ID
+  android:
+    packageName: $PACKAGE_NAME
+    versionName: $VERSION_NAME
+    versionCode: $VERSION_CODE

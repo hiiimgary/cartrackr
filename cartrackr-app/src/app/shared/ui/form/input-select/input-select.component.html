@@ -1,0 +1,7 @@
+<ion-item lines="none" color="transparent" class="custom-input">
+  <ion-label position="stacked" class="input-label">{{ label }}</ion-label>
+  <ion-select interface="popover" (ionChange)="onChangeValue($event)" [placeholder]="placeholder"
+    [interfaceOptions]="{cssClass: 'select-popover'}">
+    <ion-select-option *ngFor="let option of options" [value]="option.key">{{ option.value }}</ion-select-option>
+  </ion-select>
+</ion-item>

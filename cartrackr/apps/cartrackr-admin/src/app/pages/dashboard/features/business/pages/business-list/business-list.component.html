@@ -1,0 +1,28 @@
+<app-detail-header (filter)="onFilter($event)"></app-detail-header>
+<ng-container *ngIf="list$ | async as list">
+  <cartrackr-table [data]="list">
+    <ng-template [appTableHeader]="list" let-data>
+      <th class="py-3 px-6">ID</th>
+      <th class="py-3 px-6">name</th>
+      <th class="py-3 px-6">createdAt</th>
+      <th></th>
+    </ng-template>
+    <ng-template [appTableRow]="list" let-row>
+      <td class="py-3 px-6">
+        {{ row.id }}
+      </td>
+      <td class="py-3 px-6">
+        {{ row.name }}
+      </td>
+      <td class="py-3 px-6">
+        {{ row.createdAt | date:'yyyy.MM.dd hh:mm' }}
+      </td>
+
+      <td class="flex gap-2 justify-end py-2 pr-2">
+        <button *ngIf="!row.isActive" class="btn-sm success" (click)="onActivate(row.id)">Activate</button>
+        <a class="btn-sm" [routerLink]="[row.id]">Edit</a>
+        <button class="btn-sm danger" (click)="onDelete(row.id)">Delete</button>
+      </td>
+    </ng-template>
+  </cartrackr-table>
+</ng-container>

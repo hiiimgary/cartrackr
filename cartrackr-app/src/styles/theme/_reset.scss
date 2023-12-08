@@ -1,0 +1,21 @@
+p {
+  margin: 0;
+}
+
+ion-img {
+  &::part(image) {
+    pointer-events: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+}
+
+h5 {
+  font-size: 16px;
+}

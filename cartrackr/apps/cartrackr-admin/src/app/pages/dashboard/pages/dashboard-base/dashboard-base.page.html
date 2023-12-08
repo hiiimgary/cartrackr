@@ -1,0 +1,7 @@
+<app-header (logout)="onLogoutClick()"></app-header>
+<div class="h-[calc(100vh-64px)] flex">
+    <app-nav class="max-w-[250px] w-full h-full" [navItems]="navItems$ | async"></app-nav>
+    <main class="flex-1 overflow-y-scroll p-6">
+        <router-outlet></router-outlet>
+    </main>
+</div>

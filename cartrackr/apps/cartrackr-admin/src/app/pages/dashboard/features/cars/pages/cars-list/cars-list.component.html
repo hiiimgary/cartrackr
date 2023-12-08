@@ -1,0 +1,40 @@
+<app-detail-header (filter)="onFilter($event)"></app-detail-header>
+<ng-container *ngIf="list$ | async as list">
+  <cartrackr-table [data]="list">
+    <ng-template [appTableHeader]="list" let-data>
+      <th>
+      </th>
+      <th class="py-3 px-6">License plate</th>
+      <th class="py-3 px-6">Model</th>
+      <th class="py-3 px-6">added</th>
+      <th></th>
+    </ng-template>
+    <ng-template [appTableRow]="list" let-row>
+      <td class="px-2 py-2">
+        <img class="aspect-square rounded object-cover w-16" *ngIf="row.images.length > 0" [src]="row.images[0].path"
+          alt="" />
+      </td>
+
+      <td class="py-3 px-6">
+        {{ row.licensePlate }}
+      </td>
+
+      <td class="py-3 px-6">
+        {{ row.brand.name }} {{ row.model.name }}
+      </td>
+
+      <td class="py-3 px-6">
+        {{ row.addedAt | date: 'yyyy.MM.dd hh:mm' }}
+      </td>
+
+      <td class="py-2 pr-2">
+        <div class="flex gap-2 justify-end items-center">
+          <a class="btn-sm" [routerLink]="[row.businessCarId]">View</a>
+          <a class="btn-sm success" [routerLink]="[row.businessCarId, 'notify']">Notify</a>
+          <button class="btn-sm danger" (click)="onDelete(row.businessCarId)">Remove</button>
+        </div>
+
+      </td>
+    </ng-template>
+  </cartrackr-table>
+</ng-container>

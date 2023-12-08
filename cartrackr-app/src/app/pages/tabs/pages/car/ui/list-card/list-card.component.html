@@ -1,0 +1,24 @@
+<ion-item-sliding #slidingCard [class.danger]="color === 'danger-card'" [class.warning]="color === 'warning-card'">
+
+  <ion-item (click)="slidingCard.open('end')" lines="none" class="list-item" [color]="color" [button]="button">
+    <ion-icon *ngIf="icon" class="list-item-icon" [name]="icon"></ion-icon>
+    <div class="list-item-body">
+      <div class="list-item-body-content">
+        <p class="list-item-body-content-title">
+          <ng-content select="[title]"></ng-content>
+        </p>
+        <p class="list-item-body-content-subtitle">
+          <ng-content select="[subtitle]"></ng-content>
+        </p>
+      </div>
+      <div class="list-item-body-end">
+        <ng-content select="[end]"></ng-content>
+      </div>
+    </div>
+
+  </ion-item>
+
+  <ion-item-options side="end">
+    <ng-content select="[options]"></ng-content>
+  </ion-item-options>
+</ion-item-sliding>

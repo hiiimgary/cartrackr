@@ -1,0 +1,7 @@
+<ng-container *ngIf="loginState$ | async as loginState; else pending">
+    <p class="text-white">LoginSuccess: {{ loginState.success}}</p>
+</ng-container>
+
+<ng-template #pending>
+    <p class="text-white">Pending</p>
+</ng-template>

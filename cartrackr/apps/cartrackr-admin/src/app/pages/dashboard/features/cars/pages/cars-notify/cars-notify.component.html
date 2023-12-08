@@ -1,0 +1,23 @@
+<ng-container *ngIf="detail$ | async as detail">
+
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-2 pl-6 dark:text-white flex items-center justify-between">
+    <div>
+      <h2 class="dark:text-white text-xl">{{ detail.brand.name }} {{ detail.model.name }}</h2>
+      <p>{{ detail.licensePlate }}</p>
+    </div>
+    <img class="object-cover aspect-square w-28 rounded-md" *ngIf="detail.images.length > 0"
+      [src]="detail.images[0].path" alt="">
+
+  </div>
+
+  <div class="bg-white dark:bg-gray-800 rounded-lg p-6 dark:text-white my-4">
+    <h2 class="dark:text-white text-xl pb-6">Notify</h2>
+
+    <form [formGroup]="createForm" (ngSubmit)="onSubmitClick()">
+      <app-text-input formControlName="title" label="Title" type="text"></app-text-input>
+      <button type="submit" class="btn w-full mt-6">Notify Owner</button>
+    </form>
+
+  </div>
+</ng-container>

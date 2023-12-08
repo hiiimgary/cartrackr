@@ -1,0 +1,21 @@
+<ion-header *ngIf="!isScanning">
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>Scan car</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/business"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!isScanning" color="light" class="safe-bottom">
+
+
+
+</ion-content>
+
+<ng-container *ngIf="isScanning">
+  <div class="scanner-box"></div>
+  <ion-button fill="clear" class="scanner-btn" color="light" (click)="stopScanning()"><span
+      class="bold-btn">Cancel</span>
+  </ion-button>
+</ng-container>

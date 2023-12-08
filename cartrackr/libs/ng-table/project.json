@@ -1,0 +1,34 @@
+{
+  "name": "ng-table",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ng-table/src",
+  "prefix": "cartrackr",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "libs/ng-table/ng-package.json",
+        "tailwindConfig": "libs/ng-table/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/ng-table/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/ng-table/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/ng-table/**/*.ts", "libs/ng-table/**/*.html"]
+      }
+    }
+  }
+}

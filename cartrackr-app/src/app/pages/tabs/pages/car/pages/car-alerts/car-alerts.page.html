@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>{{ 'CAR.ALERTS.TITLE' | translate }}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/tabs/car/' + carId" class="ion-back-button-no-text">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ng-container *ngIf="unreadAlertsSignal() as unreadAlerts">
+    <ng-container *ngIf="unreadAlerts.length > 0">
+      <ion-list-header>
+        <ion-label color="primary">{{ 'CAR.ALERTS.NEW' | translate }}</ion-label>
+      </ion-list-header>
+      <ion-list [inset]="true">
+
+        <app-list-card *ngFor="let alert of unreadAlerts" color="danger-card">
+          <ion-label title>
+            {{ alert.description }}
+          </ion-label>
+          <ng-container subtitle>
+            {{ alert.date | date:'yyyy.MM.dd. HH:mm'}}
+          </ng-container>
+          <ng-container options>
+            <ion-item-option color="danger" (click)="onDelete(alert.id)">
+              <ion-icon slot="top" name="trash-outline"></ion-icon>
+              {{ 'CAR.ALERTS.FALSE_ALARM' | translate }}
+            </ion-item-option>
+            <ion-item-option (click)="onResolve(alert.id)">
+              <ion-icon slot="top" name="checkmark-done-outline"></ion-icon>
+              {{ 'CAR.ALERTS.RESOLVE' | translate }}
+
+            </ion-item-option>
+          </ng-container>
+        </app-list-card>
+      </ion-list>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="readAlertsSignal() as readAlerts">
+    <ng-container *ngIf="readAlerts.length > 0">
+      <ion-list-header>
+        <ion-label color="primary">{{ 'CAR.ALERTS.RESOLVED' | translate }}</ion-label>
+      </ion-list-header>
+      <ion-list [inset]="true">
+
+        <app-list-card *ngFor="let alert of readAlerts">
+          <ion-label title>
+            {{ alert.description }}
+          </ion-label>
+          <ng-container subtitle>
+            {{ alert.date | date}}
+          </ng-container>
+        </app-list-card>
+      </ion-list>
+    </ng-container>
+  </ng-container>
+</ion-content>

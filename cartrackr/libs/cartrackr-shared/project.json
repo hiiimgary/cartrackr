@@ -1,0 +1,26 @@
+{
+  "name": "cartrackr-shared",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/cartrackr-shared/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/cartrackr-shared",
+        "main": "libs/cartrackr-shared/src/index.ts",
+        "tsConfig": "libs/cartrackr-shared/tsconfig.lib.json",
+        "assets": ["libs/cartrackr-shared/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/cartrackr-shared/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["shared"]
+}

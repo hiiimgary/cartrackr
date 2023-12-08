@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="light" class="main-toolbar no-border">
+    <ion-title>{{ 'CAR.EXPENSES.TITLE' | translate }}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/tabs/car/' + carId" class="ion-back-button-no-text">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button haptic slot="icon-only" color="primary" (click)="onOpenCreateClick()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light" class="safe-bottom">
+  <ng-container *ngIf="expensesSignal() as expenses">
+    <ng-container *ngFor="let month of expenses">
+      <ion-list-header>
+        <ion-label color="primary">{{ month.date | date:'yyyy. MMMM' }}</ion-label>
+      </ion-list-header>
+      <ion-list [inset]="true">
+
+        <app-list-card *ngFor="let expense of month.list" [button]="true" [routerLink]="[expense.id]">
+          <ion-label title>
+            {{ expense.title }}
+          </ion-label>
+          <ng-container subtitle>
+            {{ expense.date | date}}
+          </ng-container>
+          <ion-badge end>{{ expense.price | number:'1.0-0' }} Ft</ion-badge>
+        </app-list-card>
+      </ion-list>
+    </ng-container>
+  </ng-container>
+
+
+
+
+
+</ion-content>

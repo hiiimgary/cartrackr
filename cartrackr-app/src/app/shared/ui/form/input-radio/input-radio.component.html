@@ -1,0 +1,14 @@
+<ion-list-header>
+  <ion-label color="primary">{{ label }}</ion-label>
+</ion-list-header>
+<ion-list [inset]="true">
+  <ion-radio-group (ionChange)="onChangeValue($event.target.value)">
+    <ng-container *ngFor="let option of options">
+      <ion-item color="primary-card" lines="none" class="list-item">
+        <ion-radio mode="md" [value]="option.key">{{ option.value
+          }}</ion-radio>
+      </ion-item>
+    </ng-container>
+
+  </ion-radio-group>
+</ion-list>

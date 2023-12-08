@@ -1,0 +1,67 @@
+.subtitle {
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.cover-image-card {
+  border-radius: 0;
+  aspect-ratio: 4/3;
+
+  &::part(native) {
+    height: 100%;
+  }
+
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.card-header-with-badge {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.progress-bar {
+  height: 12px;
+  border-radius: 6px;
+}
+
+.expense-body {
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .metric {
+    .metric-group {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: 12px;
+    }
+  }
+}
+
+.consumption-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .consumption {
+    font-size: 14px;
+  }
+}
+
+.qr-wrapper {
+  width: 100%;
+}
+
+.comsumption-alert {
+  padding-block: 8px;
+  display: flex;
+  justify-content: center;
+}

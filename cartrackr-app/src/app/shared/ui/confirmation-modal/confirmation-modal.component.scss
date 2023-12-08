@@ -1,0 +1,22 @@
+.confirmation-modal {
+  --border-radius: 20px;
+  --height: auto;
+
+  .ion-page {
+    position: relative;
+    display: block;
+    contain: content;
+  }
+}
+
+.inner-content {
+  padding-top: 16px;
+  padding-bottom: var(--ion-safe-area-bottom);
+  max-height: 80vh;
+  overflow: auto;
+
+  .confirmation-description {
+    font-size: 14px;
+    padding-top: 8px;
+  }
+}

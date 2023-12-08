@@ -1,0 +1,13 @@
+<ion-card class="card" [routerLink]="['/', 'tabs', 'car', car.id]" [button]="true">
+  <div class="card-image" [style.backgroundImage]="'url(' + (car.thumbnail ? car.thumbnail.path : '') + ')'">
+  </div>
+  <div class="card-background"></div>
+  <ion-card-content class="card-content">
+    <ion-text color="light">
+      <h2 class="card-content-title">
+        {{ car.licensePlate }}
+      </h2>
+    </ion-text>
+
+  </ion-card-content>
+</ion-card>

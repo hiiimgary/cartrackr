@@ -1,0 +1,29 @@
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-200 bg-white dark:bg-gray-800 rounded-t-lg">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
+        <tr>
+            <ng-container *ngTemplateOutlet="
+            headers || defaultHeaderTemplate;
+            context: { $implicit: data }
+          "></ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data; let i = index"
+            [ngClass]="{'bg-gray-50 dark:bg-gray-700': i % 2 === 0, 'bg-white dark:bg-gray-800': i % 2 !== 0}"
+            class="bg-white hover:bg-gray-50 dark:hover:bg-gray-600">
+            <ng-container *ngTemplateOutlet="
+            rows || defaultRowTemplate;
+            context: { $implicit: row }
+          "></ng-container>
+        </tr>
+    </tbody>
+</table>
+<div class="h-4 bg-white dark:bg-gray-800 rounded-b-lg"></div>
+
+<ng-template #defaultHeaderTemplate let-data>
+    <th class="py-3" *ngFor="let header of data[0] | keyvalue">{{ header.key }}</th>
+</ng-template>
+
+<ng-template #defaultRowTemplate let-row>
+    <td class="py-3" *ngFor="let row of row | keyvalue;">{{ row.value }}</td>
+</ng-template>

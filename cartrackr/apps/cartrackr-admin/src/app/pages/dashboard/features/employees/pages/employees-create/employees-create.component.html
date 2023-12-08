@@ -1,0 +1,13 @@
+<ng-container *ngIf="detail$ | async"></ng-container>
+<div class="bg-white dark:bg-gray-800 rounded-lg p-6">
+  <form [formGroup]="createForm" (ngSubmit)="onSubmitClick()">
+    <div class="flex items-center gap-4">
+      <app-text-input class="flex-1" formControlName="firstName" label="First Name" type="text"></app-text-input>
+      <app-text-input class="flex-1" formControlName="lastName" label="Last Name" type="text"></app-text-input>
+    </div>
+    <app-text-input formControlName="email" label="Email" type="email"></app-text-input>
+    <app-input-select formControlName="permission" label="Role" [options]="permissions"></app-input-select>
+
+    <button type="submit" class="btn w-full mt-6">Save</button>
+  </form>
+</div>

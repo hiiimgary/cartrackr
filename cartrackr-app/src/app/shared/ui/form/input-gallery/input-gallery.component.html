@@ -1,0 +1,31 @@
+<ion-item lines="none" color="transparent" class="custom-input">
+  <ion-label position="stacked" class="input-label">{{ label }}</ion-label>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col *ngFor="let image of value; let i = index" size="4" class="ion-no-padding">
+        <ion-card button haptic class="ion-no-margin" [class.bottom-left-border]="value.length < i + 3 && i % 3 === 0">
+          <ion-img [src]="image.path"></ion-img>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-padding-bottom">
+        <app-card-button iconName="add" color="primary" class="add-btn no-shadow" (cardClick)="isAddPhotoOpen = true"
+          [isLoading$]="isPhotosLoading$"
+          [ngClass]="{'top-left': value.length === 0, 'top-right': value.length < 3, 'bottom-left': value.length % 3 === 0, 'adjust-height': value.length > 3 && value.length % 3 !== 0}">
+          {{ (value.length === 0 ? 'INPUT.GALLERY.ADD' : 'INPUT.GALLERY.ADD_MORE') | translate }}
+        </app-card-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>
+
+<!-- ADD PHOTO -->
+<app-confirmation-modal [isOpen]="isAddPhotoOpen" (onToggle)="isAddPhotoOpen = false">
+  <app-card-button iconName="images-outline" class="modal-card-btn left no-shadow" left
+    (cardClick)="onAddImagesFromGalleryClick()">
+    {{ 'INPUT.GALLERY.ADD_IMAGES_MODAL.ADD_IMAGES_BTN' | translate }}
+  </app-card-button>
+  <app-card-button iconName="camera-outline" class="modal-card-btn right no-shadow" right
+    (cardClick)="onTakePhotoClick()">
+    {{ 'INPUT.GALLERY.ADD_IMAGES_MODAL.CAPTURE_BTN' | translate }}
+  </app-card-button>
+</app-confirmation-modal>

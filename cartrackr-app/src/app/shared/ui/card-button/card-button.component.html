@@ -1,0 +1,13 @@
+<ion-button color="card" expand="block" (click)="cardClick.emit()" haptic [disabled]="(isLoading$ | async) === true">
+  <div class="button-content">
+    <app-loading [isLoading$]="isLoading$" [color]="color">
+      <ion-icon [name]="iconName" [color]="color"></ion-icon>
+      <ion-text [color]="color">
+        <p>
+          <ng-content></ng-content>
+        </p>
+      </ion-text>
+    </app-loading>
+  </div>
+
+</ion-button>

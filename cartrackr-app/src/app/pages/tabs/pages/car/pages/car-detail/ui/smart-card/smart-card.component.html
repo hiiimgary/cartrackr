@@ -1,0 +1,17 @@
+<ion-card [button]="button" [color]="color" class="card">
+  <ion-card-header>
+    <ng-container *ngIf="icon">
+      <ion-icon class="card-icon" [name]="icon"></ion-icon>
+    </ng-container>
+    <div class="header-main">
+      <ng-content select="[header]"></ng-content>
+    </div>
+    <ion-button *ngIf="button" class="nav-btn">
+      <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+    </ion-button>
+
+  </ion-card-header>
+  <ion-card-content>
+    <ng-content></ng-content>
+  </ion-card-content>
+</ion-card>
