@@ -18,19 +18,19 @@ import { CarActions } from 'src/app/pages/tabs/pages/car/store/car.actions';
 export class AuthEffects {
   isLoggedIn$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AuthActions.isLoggedIn, AppActions.init),
+      ofType(AuthActions.isLoggedIn, AppActions.init, CarActions.createExpense),
       switchMap(() =>
         this.authService.isLoggedIn$().pipe(
           map((payload) =>
             AuthActions.loggedIn({
               user: payload.user,
               cars: payload.cars.map(this.carService.mapCar),
-            }),
+            })
           ),
-          catchError(() => of(AuthActions.notLoggedIn())),
-        ),
-      ),
-    ),
+          catchError(() => of(AuthActions.notLoggedIn()))
+        )
+      )
+    )
   );
 
   refresh$ = createEffect(() =>
@@ -41,12 +41,12 @@ export class AuthEffects {
           map((payload) =>
             CarActions.refreshSuccess({
               cars: payload.cars.map(this.carService.mapCar),
-            }),
+            })
           ),
-          catchError(() => of(AuthActions.notLoggedIn())),
-        ),
-      ),
-    ),
+          catchError(() => of(AuthActions.notLoggedIn()))
+        )
+      )
+    )
   );
 
   signInWithApple$ = createEffect(() =>
@@ -59,12 +59,12 @@ export class AuthEffects {
             of(
               SnackbarActions.showErrorMsg({
                 message: 'Something went wrong.',
-              }),
-            ),
-          ),
-        ),
-      ),
-    ),
+              })
+            )
+          )
+        )
+      )
+    )
   );
 
   signInWithGoogle$ = createEffect(() =>
@@ -78,14 +78,14 @@ export class AuthEffects {
             return this.authService.signInWithGoogle$({
               idToken: res.authentication.idToken,
             });
-          }),
-        ),
+          })
+        )
       ),
       map(() => AuthActions.isLoggedIn()),
       catchError(() =>
-        of(SnackbarActions.showErrorMsg({ message: 'Something went wrong.' })),
-      ),
-    ),
+        of(SnackbarActions.showErrorMsg({ message: 'Something went wrong.' }))
+      )
+    )
   );
 
   signInWithBusiness$ = createEffect(() =>
@@ -98,30 +98,30 @@ export class AuthEffects {
             of(
               SnackbarActions.showErrorMsg({
                 message: 'Something went wrong.',
-              }),
-            ),
-          ),
-        ),
-      ),
-    ),
+              })
+            )
+          )
+        )
+      )
+    )
   );
 
   initPush$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loggedIn),
-        tap(() => this.pushService.initPush()),
+        tap(() => this.pushService.initPush())
       ),
-    { dispatch: false },
+    { dispatch: false }
   );
 
   navigateToTabs$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loggedIn),
-        tap(() => this.router.navigate(['/', 'tabs'])),
+        tap(() => this.router.navigate(['/', 'tabs']))
       ),
-    { dispatch: false },
+    { dispatch: false }
   );
 
   logout$ = createEffect(
@@ -130,9 +130,9 @@ export class AuthEffects {
         ofType(AuthActions.logout),
         switchMap(() => this.pushService.disablePushNotifications$()),
         switchMap(() => this.authService.logout$()),
-        tap(() => this.navController.navigateRoot(['/', 'auth'])),
+        tap(() => this.navController.navigateRoot(['/', 'auth']))
       ),
-    { dispatch: false },
+    { dispatch: false }
   );
 
   constructor(
@@ -141,6 +141,6 @@ export class AuthEffects {
     private readonly carService: CarService,
     private readonly router: Router,
     private readonly navController: NavController,
-    private readonly pushService: PushNotificationService,
+    private readonly pushService: PushNotificationService
   ) {}
 }

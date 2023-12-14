@@ -127,6 +127,12 @@ export class AppCarController {
     return this.appCarService.deleteCar(params.id, req.user.id);
   }
 
+  @Get(':id')
+  @UseGuards(AppJwtAuthGuard)
+  getCarDetail(@Request() req, @Param() params: IdParams) {
+    return this.appCarService.findCarDetail(req.user.id, params.id);
+  }
+
   @Post(':id/expenses/create')
   @UseGuards(AppJwtAuthGuard)
   async createExpense(

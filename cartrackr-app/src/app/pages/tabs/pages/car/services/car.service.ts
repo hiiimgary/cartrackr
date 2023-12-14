@@ -36,7 +36,7 @@ export class CarService {
     return this.http.get<Init>('init').pipe(
       tap((res) => {
         console.log(res);
-      }),
+      })
     );
   }
 
@@ -49,7 +49,15 @@ export class CarService {
     return this.http.post<CarResponse>('cars/create', payload).pipe(
       map((res) => {
         return this.mapCar(res);
-      }),
+      })
+    );
+  }
+
+  fetchCarDetail$(id: number): Observable<Car> {
+    return this.http.get<CarResponse>(`cars/${id}`).pipe(
+      map((res) => {
+        return this.mapCar(res);
+      })
     );
   }
 
@@ -57,7 +65,7 @@ export class CarService {
     return this.http.put<CarResponse>('cars/modify', car).pipe(
       map((res) => {
         return this.mapCar(res);
-      }),
+      })
     );
   }
 
@@ -65,7 +73,7 @@ export class CarService {
     return this.http.delete(`cars/${carId}`).pipe(
       map((res) => {
         return;
-      }),
+      })
     );
   }
 
@@ -73,7 +81,7 @@ export class CarService {
     return this.http.post(`cars/${carId}/alerts/${alertId}/resolve`, {}).pipe(
       map((res) => {
         return;
-      }),
+      })
     );
   }
 
@@ -81,13 +89,13 @@ export class CarService {
     return this.http.post(`cars/${carId}/alerts/${alertId}/archive`, {}).pipe(
       map((res) => {
         return;
-      }),
+      })
     );
   }
 
   createDeadline$(
     deadline: CreateDeadline,
-    carId: number,
+    carId: number
   ): Observable<{ deadline: Deadline; carId: number }> {
     return this.http.post(`cars/${carId}/deadlines/create`, deadline).pipe(
       map((res) => {
@@ -95,7 +103,7 @@ export class CarService {
           deadline: this.mapDeadline(res),
           carId,
         };
-      }),
+      })
     );
   }
 
@@ -109,13 +117,13 @@ export class CarService {
     return this.http.delete(`cars/${carId}/deadlines/${deadlineId}`).pipe(
       map((res) => {
         return;
-      }),
+      })
     );
   }
 
   createExpense$(
     expense: CreateExpense,
-    carId: number,
+    carId: number
   ): Observable<{ expense: Expense; carId: number }> {
     return this.http
       .post<Expense>(`cars/${carId}/expenses/create`, expense)
@@ -125,7 +133,7 @@ export class CarService {
             expense: this.mapExpense(res),
             carId,
           };
-        }),
+        })
       );
   }
 
@@ -133,7 +141,7 @@ export class CarService {
     return this.http.delete(`cars/${carId}/expenses/${expenseId}`).pipe(
       map((res) => {
         return;
-      }),
+      })
     );
   }
 
@@ -141,7 +149,7 @@ export class CarService {
     return this.http.post('cars/add-to-business', { token }).pipe(
       map((res) => {
         return;
-      }),
+      })
     );
   }
 
@@ -151,7 +159,7 @@ export class CarService {
       .pipe(
         map((res) => {
           return;
-        }),
+        })
       );
   }
 
@@ -239,7 +247,7 @@ export class CarService {
     >((acc, curr) => {
       const expenseDate = parseISO(`${curr.date}`);
       const alreadyAddedMonth = acc.find((a) =>
-        isSameMonth(a.date, expenseDate),
+        isSameMonth(a.date, expenseDate)
       );
 
       if (!alreadyAddedMonth) {

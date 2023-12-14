@@ -18,7 +18,7 @@ import { UserBusinessModule } from '../../admin/user-business/user-business.modu
     PassportModule,
     JwtModule.register({
       secret: 'process.env.JWT_SECRET',
-      signOptions: { expiresIn: '2h' },
+      signOptions: { expiresIn: '15s' },
     }),
     AppUserModule,
     UsersModule,

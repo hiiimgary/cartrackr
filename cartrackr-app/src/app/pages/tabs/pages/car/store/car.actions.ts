@@ -27,6 +27,9 @@ export const CarActions = createActionGroup({
     fetchCars: emptyProps(),
     fetchCarsSuccess: props<{ cars: List<Car> }>(),
 
+    // Fetch Car Detail
+    fetchCarDetailSuccess: props<{ car: Car }>(),
+
     // Create Car
     createCar: props<{ car: CreateCar }>(),
     createCarSuccess: props<{ car: Car }>(),

@@ -29,6 +29,7 @@ import { LoggedInJwtAuthGuard } from './guards/logged-in-jwt-auth.guard';
 import { UserBusinessService } from '../../admin/user-business/user-business.service';
 import axios from 'axios';
 import { GoogleLoginDto } from './dto/google-login.dto';
+import { resolve } from 'path';
 
 @Controller('auth')
 export class AppAuthController {
@@ -168,6 +169,9 @@ export class AppAuthController {
     const refreshToken = await this.authService.generateRefreshTokenForUser(
       req.user
     );
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+
     res.status(HttpStatus.OK);
     return {
       accessToken,

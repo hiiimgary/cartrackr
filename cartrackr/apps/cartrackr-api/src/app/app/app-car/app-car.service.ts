@@ -62,6 +62,36 @@ export class AppCarService {
     return cars.map((car) => this.mapCarToResponse(car));
   }
 
+  async findCarDetail(userId: number, carId: number): Promise<CarResponseDto> {
+    const car = await this.carsRepository
+      .createQueryBuilder('car')
+      .leftJoinAndSelect('car.model', 'model')
+      .leftJoinAndSelect('car.images', 'images')
+      .leftJoinAndSelect('model.category', 'category')
+      .leftJoinAndSelect('category.brand', 'brand')
+      .leftJoinAndSelect('model.brand', 'modelBrand')
+      .leftJoinAndSelect(
+        'car.expenses',
+        'expense',
+        'expense.isFinalized = true'
+      )
+      .leftJoinAndSelect('car.deadlines', 'deadline')
+      .leftJoinAndSelect('car.businesses', 'businessCar')
+      .leftJoinAndSelect('businessCar.business', 'business')
+      .leftJoinAndSelect('car.alerts', 'alert', 'alert.isArchived = false')
+      .leftJoinAndSelect('alert.alertType', 'alertType')
+      .leftJoinAndSelect('expense.expenseCategory', 'expenseCategory')
+      .leftJoinAndSelect('expense.refill', 'expenseRefill')
+      .leftJoinAndSelect('expense.serviceEntry', 'expenseServiceEntry')
+      .orderBy('expense.date', 'DESC')
+      .addOrderBy('alert.createdAt', 'DESC')
+      .where('car.ownerId = :userId', { userId })
+      .andWhere('car.id = :carId', { carId })
+      .getOne();
+
+    return this.mapCarToResponse(car);
+  }
+
   findCarByUser(userId: number, carId: number) {
     return this.carsRepository.findOne({
       where: { id: carId, ownerId: userId },

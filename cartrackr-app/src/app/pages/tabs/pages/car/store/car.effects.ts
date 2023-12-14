@@ -32,11 +32,11 @@ export class CarEffects {
             return of(
               SnackbarActions.showErrorMsg({
                 message: 'Something went wrong.',
-              }),
+              })
             );
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -52,7 +52,7 @@ export class CarEffects {
               brandId: action.car.brandId,
               fuelType: action.car.fuelType,
             },
-            action.car.images.map((i) => i.file),
+            action.car.images.map((i) => i.file)
           )
           .pipe(
             map((car) => {
@@ -63,11 +63,31 @@ export class CarEffects {
               return of(
                 CarActions.createCarError({
                   errorMsg: 'Something went wrong.',
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
+    );
+  });
+
+  fetchCarDetail$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(CarActions.createExpense),
+      concatMap((action) => {
+        return this.carService.fetchCarDetail$(action.carId).pipe(
+          map((car) => {
+            return CarActions.fetchCarDetailSuccess({ car });
+          }),
+          catchError((error) => {
+            return of(
+              SnackbarActions.showErrorMsg({
+                message: 'Something went wrong.',
+              })
+            );
+          })
+        );
+      })
     );
   });
 
@@ -81,11 +101,11 @@ export class CarEffects {
           }),
           catchError((error) => {
             return of(
-              CarActions.modifyCarError({ errorMsg: 'Something went wrong.' }),
+              CarActions.modifyCarError({ errorMsg: 'Something went wrong.' })
             );
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -102,11 +122,11 @@ export class CarEffects {
             return of(
               SnackbarActions.showErrorMsg({
                 message: 'Something went wrong.',
-              }),
+              })
             );
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -121,11 +141,11 @@ export class CarEffects {
               CarActions.resolveAlertError({
                 alertId: action.alertId,
                 carId: action.carId,
-              }),
+              })
             );
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -138,18 +158,18 @@ export class CarEffects {
             CarActions.deleteAlertSuccess({
               alertId: action.alertId,
               carId: action.carId,
-            }),
+            })
           ),
           catchError(() => {
             return of(
               CarActions.deleteAlertError({
                 alertId: action.alertId,
                 carId: action.carId,
-              }),
+              })
             );
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -168,11 +188,11 @@ export class CarEffects {
               return of(
                 SnackbarActions.showErrorMsg({
                   message: 'Something went wrong.',
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
     );
   });
 
@@ -187,18 +207,18 @@ export class CarEffects {
               CarActions.deleteExpenseSuccess({
                 expenseId: action.expenseId,
                 carId: action.carId,
-              }),
+              })
             ),
             catchError(() => {
               return of(
                 CarActions.deleteExpenseError({
                   expenseId: action.expenseId,
                   carId: action.carId,
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
     );
   });
 
@@ -217,11 +237,11 @@ export class CarEffects {
               return of(
                 SnackbarActions.showErrorMsg({
                   message: 'Something went wrong.',
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
     );
   });
 
@@ -238,11 +258,11 @@ export class CarEffects {
                 CarActions.markDeadlineDoneError({
                   deadlineId: action.deadlineId,
                   carId: action.carId,
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
     );
   });
 
@@ -257,18 +277,18 @@ export class CarEffects {
               CarActions.deleteDeadlineSuccess({
                 deadlineId: action.deadlineId,
                 carId: action.carId,
-              }),
+              })
             ),
             catchError(() => {
               return of(
                 CarActions.deleteDeadlineError({
                   deadlineId: action.deadlineId,
                   carId: action.carId,
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
     );
   });
 
@@ -285,11 +305,11 @@ export class CarEffects {
             return of(
               SnackbarActions.showErrorMsg({
                 message: 'Something went wrong.',
-              }),
+              })
             );
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -311,11 +331,11 @@ export class CarEffects {
               return of(
                 SnackbarActions.showErrorMsg({
                   message: 'Something went wrong.',
-                }),
+                })
               );
-            }),
+            })
           );
-      }),
+      })
     );
   });
 
@@ -324,6 +344,6 @@ export class CarEffects {
     private readonly carService: CarService,
     private readonly router: NavController,
     private readonly modalCtrl: ModalController,
-    private readonly navCtrl: NavController,
+    private readonly navCtrl: NavController
   ) {}
 }

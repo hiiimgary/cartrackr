@@ -62,6 +62,12 @@ export const reducer = createReducer(
     ...state,
     cars: [],
   })),
+  on(CarActions.fetchCarDetailSuccess, (state, action) => ({
+    ...state,
+    cars: state.cars.map((car) =>
+      car.id === action.car.id ? action.car : car
+    ),
+  })),
   on(CarActions.fetchCarsSuccess, (state, { cars }) => ({
     ...state,
     cars,
@@ -149,7 +155,7 @@ export const reducer = createReducer(
               errorMsg: null,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(
@@ -168,9 +174,9 @@ export const reducer = createReducer(
                 hasMore: alerts.length > 0,
               },
             }
-          : car,
+          : car
       ),
-    }),
+    })
   ),
   on(CarActions.resolveAlert, (state, { alertId, carId }) => ({
     ...state,
@@ -181,12 +187,12 @@ export const reducer = createReducer(
             alerts: {
               ...car.alerts,
               list: car.alerts.list.map((a) =>
-                a.id === alertId ? { ...a, isRead: true } : a,
+                a.id === alertId ? { ...a, isRead: true } : a
               ),
               unreadCount: car.alerts.unreadCount - 1,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.resolveAlertError, (state, { alertId, carId }) => ({
@@ -198,12 +204,12 @@ export const reducer = createReducer(
             alerts: {
               ...car.alerts,
               list: car.alerts.list.map((a) =>
-                a.id === alertId ? { ...a, isRead: false } : a,
+                a.id === alertId ? { ...a, isRead: false } : a
               ),
               unreadCount: car.alerts.unreadCount + 1,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteAlert, (state, { alertId, carId }) => ({
@@ -215,12 +221,12 @@ export const reducer = createReducer(
             alerts: {
               ...car.alerts,
               list: car.alerts.list.map((a) =>
-                a.id === alertId ? { ...a, isDeleted: true } : a,
+                a.id === alertId ? { ...a, isDeleted: true } : a
               ),
               unreadCount: car.alerts.unreadCount - 1,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteAlertSuccess, (state, { alertId, carId }) => ({
@@ -234,7 +240,7 @@ export const reducer = createReducer(
               list: car.alerts.list.filter((a) => a.id !== alertId),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteAlertError, (state, { alertId, carId }) => ({
@@ -246,12 +252,12 @@ export const reducer = createReducer(
             alerts: {
               ...car.alerts,
               list: car.alerts.list.map((a) =>
-                a.id === alertId ? { ...a, isDeleted: false } : a,
+                a.id === alertId ? { ...a, isDeleted: false } : a
               ),
               unreadCount: car.alerts.unreadCount + 1,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.fetchExpenses, (state, { carId }) => ({
@@ -266,7 +272,7 @@ export const reducer = createReducer(
               errorMsg: null,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(
@@ -285,9 +291,9 @@ export const reducer = createReducer(
                 hasMore: expenses.length > 0,
               },
             }
-          : car,
+          : car
       ),
-    }),
+    })
   ),
   on(CarActions.createExpense, (state) => ({
     ...state,
@@ -311,11 +317,11 @@ export const reducer = createReducer(
             expenses: {
               ...car.expenses,
               list: [expense, ...car.expenses.list].sort((a, b) =>
-                compareDesc(a.date, b.date),
+                compareDesc(a.date, b.date)
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.createExpenseError, (state, { errorMsg }) => ({
@@ -348,11 +354,11 @@ export const reducer = createReducer(
             expenses: {
               ...car.expenses,
               list: car.expenses.list.map((e) =>
-                e.id === expense.id ? expense : e,
+                e.id === expense.id ? expense : e
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.modifyExpenseError, (state, { errorMsg }) => ({
@@ -372,11 +378,11 @@ export const reducer = createReducer(
             expenses: {
               ...car.expenses,
               list: car.expenses.list.map((e) =>
-                e.id === expenseId ? { ...e, isDeleted: true } : e,
+                e.id === expenseId ? { ...e, isDeleted: true } : e
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteExpenseSuccess, (state, { expenseId, carId }) => ({
@@ -390,7 +396,7 @@ export const reducer = createReducer(
               list: car.expenses.list.filter((e) => e.id !== expenseId),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteExpenseError, (state, { expenseId, carId }) => ({
@@ -402,11 +408,11 @@ export const reducer = createReducer(
             expenses: {
               ...car.expenses,
               list: car.expenses.list.map((e) =>
-                e.id === expenseId ? { ...e, isDeleted: false } : e,
+                e.id === expenseId ? { ...e, isDeleted: false } : e
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.fetchDeadlines, (state, { carId }) => ({
@@ -421,7 +427,7 @@ export const reducer = createReducer(
               errorMsg: null,
             },
           }
-        : car,
+        : car
     ),
   })),
   on(
@@ -440,9 +446,9 @@ export const reducer = createReducer(
                 hasMore: deadlines.length > 0,
               },
             }
-          : car,
+          : car
       ),
-    }),
+    })
   ),
   on(CarActions.createDeadline, CarActions.modifyDeadline, (state) => ({
     ...state,
@@ -466,11 +472,11 @@ export const reducer = createReducer(
             deadlines: {
               ...car.deadlines,
               list: [deadline, ...car.deadlines.list].sort((a, b) =>
-                compareAsc(a.deadline, b.deadline),
+                compareAsc(a.deadline, b.deadline)
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(
@@ -483,7 +489,7 @@ export const reducer = createReducer(
         isLoading: false,
         errorMsg,
       },
-    }),
+    })
   ),
   on(CarActions.modifyDeadlineSuccess, (state, { deadline, carId }) => ({
     ...state,
@@ -499,11 +505,11 @@ export const reducer = createReducer(
             deadlines: {
               ...car.deadlines,
               list: car.deadlines.list.map((d) =>
-                d.id === deadline.id ? deadline : d,
+                d.id === deadline.id ? deadline : d
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
 
@@ -516,11 +522,11 @@ export const reducer = createReducer(
             deadlines: {
               ...car.deadlines,
               list: car.deadlines.list.map((d) =>
-                d.id === deadlineId ? { ...d, isDone: true } : d,
+                d.id === deadlineId ? { ...d, isDone: true } : d
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.markDeadlineDoneError, (state, { deadlineId, carId }) => ({
@@ -532,11 +538,11 @@ export const reducer = createReducer(
             deadlines: {
               ...car.deadlines,
               list: car.deadlines.list.map((d) =>
-                d.id === deadlineId ? { ...d, isDone: false } : d,
+                d.id === deadlineId ? { ...d, isDone: false } : d
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteDeadline, (state, { deadlineId, carId }) => ({
@@ -548,11 +554,11 @@ export const reducer = createReducer(
             deadlines: {
               ...car.deadlines,
               list: car.deadlines.list.map((d) =>
-                d.id === deadlineId ? { ...d, isDeleted: true } : d,
+                d.id === deadlineId ? { ...d, isDeleted: true } : d
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteDeadlineSuccess, (state, { deadlineId, carId }) => ({
@@ -566,7 +572,7 @@ export const reducer = createReducer(
               list: car.deadlines.list.filter((d) => d.id !== deadlineId),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(CarActions.deleteDeadlineError, (state, { deadlineId, carId }) => ({
@@ -578,11 +584,11 @@ export const reducer = createReducer(
             deadlines: {
               ...car.deadlines,
               list: car.deadlines.list.map((d) =>
-                d.id === deadlineId ? { ...d, isDeleted: false } : d,
+                d.id === deadlineId ? { ...d, isDeleted: false } : d
               ),
             },
           }
-        : car,
+        : car
     ),
   })),
   on(
@@ -597,16 +603,16 @@ export const reducer = createReducer(
                 ? car.businesses.map((b) =>
                     b.businessCarId === businessCarId
                       ? { ...b, isAccessGranted: true }
-                      : b,
+                      : b
                   )
                 : car.businesses.filter(
-                    (b) => b.businessCarId !== businessCarId,
+                    (b) => b.businessCarId !== businessCarId
                   ),
             }
-          : car,
+          : car
       ),
-    }),
-  ),
+    })
+  )
 );
 
 export const carFeature = createFeature({
